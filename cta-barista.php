@@ -6,6 +6,8 @@
 	Version: 1.0
 	Author: GRAFIK
 	Author URI: http://www.grafik.com/
+
+	File: ./cta-barista.php
 */
 
 	defined('ABSPATH') or die('#NiceTry');
