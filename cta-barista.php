@@ -6,8 +6,6 @@
 	Version: 1.0
 	Author: GRAFIK
 	Author URI: http://www.grafik.com/
-
-	File: ./cta-barista.php
 */
 
 	defined('ABSPATH') or die('#NiceTry');
@@ -85,15 +83,17 @@
 					);
 
 					// Format the dynamic input data...
-					foreach($_POST['Message'] as $key => $val) {
-						$PLUGIN_OPTIONS['Messages'][$key] = array(
-							'MessageText' => $val['MessageText'],
-							'ButtonText' => $val['ButtonText'],
-							'DestinationURL' => $val['DestinationURL'],
-							'Disabled' => @$val['Disabled'] == 'on' ? 1 : 0,
-							'Order' => $val['Order'],
-							'URLTarget' => $val['URLTarget']
-						);
+					if(!empty($_POST['Message'])) {
+						foreach($_POST['Message'] as $key => $val) {
+							$PLUGIN_OPTIONS['Messages'][$key] = array(
+								'MessageText' => $val['MessageText'],
+								'ButtonText' => $val['ButtonText'],
+								'DestinationURL' => $val['DestinationURL'],
+								'Disabled' => @$val['Disabled'] == 'on' ? 1 : 0,
+								'Order' => $val['Order'],
+								'URLTarget' => $val['URLTarget']
+							);
+						}
 					}
 
 					// Store data...
@@ -205,18 +205,27 @@
 			// Retrieve Stored Values...
 			$PLUGIN_OPTIONS = get_option('cta-barista');
 
+			// Save data present?
+			if(empty($PLUGIN_OPTIONS)) {
+				return false;
+			}
+
 			// Turn to array...
-			if(!is_array($PLUGIN_OPTIONS)) $PLUGIN_OPTIONS = json_decode($PLUGIN_OPTIONS);
+			if(!is_array($PLUGIN_OPTIONS)) {
+				$PLUGIN_OPTIONS = json_decode($PLUGIN_OPTIONS);
+			}
 
 			// Sanitize...
-			unset( $PLUGIN_OPTIONS['LastUpdate']);
-			foreach( $PLUGIN_OPTIONS['Messages'] as $key => $val) {
-				if( $val['Disabled'] == 1) unset( $PLUGIN_OPTIONS['Messages'][$key] );
+			unset($PLUGIN_OPTIONS['LastUpdate']);
+			if(!empty($PLUGIN_OPTIONS['Messages'])) {
+				foreach($PLUGIN_OPTIONS['Messages'] as $key => $val) {
+					if($val['Disabled'] == 1) unset($PLUGIN_OPTIONS['Messages'][$key]);
+				}
 			}
 
 			// Should we output?
 			$PLUGIN_RENDER = false;
-			switch( $PLUGIN_OPTIONS['BarVisibility'] ) {
+			switch($PLUGIN_OPTIONS['BarVisibility']) {
 				case "1": $PLUGIN_RENDER = true; break; // All
 				case "2": if(!is_page()) $PLUGIN_RENDER = true; break; // Posts Only
 				case "3": if(is_page()) $PLUGIN_RENDER = true; break; // Pages Only
