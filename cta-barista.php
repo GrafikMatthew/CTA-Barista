@@ -39,7 +39,8 @@
 		function settings_page() {
 
 			// Enforce capabilities...
-			if( !current_user_can( 'manage_options' ) ) return false;
+			// Need to create a permissions setting for customized access rights...
+			// if( !current_user_can( 'manage_options' ) ) return false;
 
 			// Buffered output...
 			$HTML = '<h1>CTA Barista: Settings</h1>';
