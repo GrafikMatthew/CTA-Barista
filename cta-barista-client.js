@@ -168,7 +168,7 @@ if(typeof jQuery == "undefined") {
 			var CTABaristaMessages = $("<div/>").appendTo(CTABaristaRootInterior).addClass("CTA-Barista-Messages");
 			for(i in CTABaristaJSON.Messages) {
 				var CTABaristaMessagesEntry = $("<div/>").appendTo(CTABaristaMessages).attr("data-order", CTABaristaJSON.Messages[i].Order).addClass("CTA-Barista-Messages-Entry");
-				$("<a/>").appendTo(CTABaristaMessagesEntry).attr("href", CTABaristaJSON.Messages[i].DestinationURL).attr("target", CTABaristaJSON.Messages[i].URLTarget).addClass("CTA-Barista-Messages-Entry-Text").html(CTABaristaJSON.Messages[i].MessageText.replace(/\\/g,'')+"&nbsp;");
+				$("<a/>").appendTo(CTABaristaMessagesEntry).attr("href", CTABaristaJSON.Messages[i].DestinationURL).attr("target", CTABaristaJSON.Messages[i].URLTarget).addClass("CTA-Barista-Messages-Entry-Text").html(CTABaristaJSON.Messages[i].MessageText.replace(/\\/g,''));
 				$("<a/>").appendTo(CTABaristaMessagesEntry).attr("href", CTABaristaJSON.Messages[i].DestinationURL).attr("target", CTABaristaJSON.Messages[i].URLTarget).addClass("CTA-Barista-Messages-Entry-Button").html(CTABaristaJSON.Messages[i].ButtonText.replace(/\\/g,''));
 			}
 			$(".CTA-Barista-Messages-Entry").sort(function(a, b) {
