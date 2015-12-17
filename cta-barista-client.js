@@ -146,8 +146,8 @@ if(typeof jQuery == "undefined") {
 			switch(CTABaristaJSON.DomRelation) {
 				case 0: CTABaristaRoot.appendTo(TargetElement); break;
 				case 1: CTABaristaRoot.prependTo(TargetElement); break;
-				case 2: CTABaristaRoot.insertBefore(TargetElement); break;
-				case 3: CTABaristaRoot.insertAfter(TargetElement); break;
+				case 2: CTABaristaRoot.insertAfter(TargetElement); break;
+				case 3: CTABaristaRoot.insertBefore(TargetElement); break;
 			}
 			if(CTABaristaJSON.CollapseMode != "0") {
 				var CTABaristaCollapse = $("<div/>").appendTo(CTABaristaRoot).addClass("CTA-Barista-Collapse");
